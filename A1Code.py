@@ -7,7 +7,13 @@ from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 
 myData=pd.read_csv('student_performance_dataset.csv')
-print (myData.columns)
-print (myData.iloc[:,1:10])
+#print (myData.columns)
+#print (myData.iloc[:,1:10])
 #student_id is left out as it is not usefull here
 #final_exam_score is there is no point predicting a final grade after the final exam has been sat, there is no use in that
+
+xVar=myData.iloc[:,1:10]
+yVar=myData.iloc[:,11]
+
+print(xVar.head(1))
+print(yVar.head(1))
