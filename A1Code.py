@@ -27,4 +27,10 @@ accuracyBest=0
 splitter = ["best", "random"]
 
 for s in splitter:
-    print(splitter)
+    for i in range(1,11):
+        clf=DecisionTreeClassifier(max_depth=i,splitter=s)
+        clf2=clf.fit(xTrain, yTrain)
+        predict=clf2.predict(xTest)
+        accuracy=accuracy_score(yTest, predict)
+        print(accuracy)
+        #Currently error - not all number
