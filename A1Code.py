@@ -12,8 +12,19 @@ myData=pd.read_csv('student_performance_dataset.csv')
 #student_id is left out as it is not usefull here
 #final_exam_score is there is no point predicting a final grade after the final exam has been sat, there is no use in that
 
-xVar=myData.iloc[:,1:10]
+xVars=myData.iloc[:,1:10]
 yVar=myData.iloc[:,11]
 
-print(xVar.head(1))
-print(yVar.head(1))
+#print(xVars.head(1))
+#print(yVar.head(1))
+
+xTrain, xTest, yTrain, yTest = train_test_split(xVars, yVar, test_size=0.2)
+
+splitterBest=0
+maxDepth=0
+accuracyBest=0
+
+splitter = ["best", "random"]
+
+for s in splitter:
+    print(splitter)
