@@ -7,25 +7,17 @@ from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 
 myData=pd.read_csv('student_performance_dataset.csv')
-#print (myData.columns)
-#print (myData.iloc[:,1:10])
+xVars=myData.iloc[:,1:10]
+xVars=pd.get_dummies(xVars)
+yVar=myData.iloc[:,11]
 #student_id is left out as it is not usefull here
 #final_exam_score is there is no point predicting a final grade after the final exam has been sat, there is no use in that
 
-xVars=myData.iloc[:,1:10]
-yVar=myData.iloc[:,11]
-
-#print(xVars.head(1))
-#print(yVar.head(1))
-
 xTrain, xTest, yTrain, yTest = train_test_split(xVars, yVar, test_size=0.2)
-
 splitterBest=0
 maxDepth=0
 accuracyBest=0
-
 splitter = ["best", "random"]
-
 for s in splitter:
     for i in range(1,11):
         clf=DecisionTreeClassifier(max_depth=i,splitter=s)
@@ -33,4 +25,4 @@ for s in splitter:
         predict=clf2.predict(xTest)
         accuracy=accuracy_score(yTest, predict)
         print(accuracy)
-        #Currently error - not all number
+        #IT WORKS!
