@@ -24,5 +24,8 @@ for s in splitter:
         clf2=clf.fit(xTrain, yTrain)
         predict=clf2.predict(xTest)
         accuracy=accuracy_score(yTest, predict)
-        print(accuracy)
-        #IT WORKS!
+        if accuracy>accuracyBest:
+            accuracyBest=accuracy
+            splitter=s
+            maxDepth=i
+            print(accuracy)
