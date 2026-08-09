@@ -26,6 +26,16 @@ for s in splitter:
         accuracy=accuracy_score(yTest, predict)
         if accuracy>accuracyBest:
             accuracyBest=accuracy
-            splitter=s
+            splitterBest=s
             maxDepth=i
-            print(accuracy)
+            #print(accuracy)
+
+clf=DecisionTreeClassifier(max_depth=maxDepth, splitter=splitterBest)
+finalModel=clf.fit(xTrain, yTrain)
+predict=finalModel.predict(xTest)
+finalAccuracy=accuracy_score(yTest, predict)
+
+print('Model is complete')
+print(f'Model accuracy: {finalAccuracy}')
+
+#Code is finished, need to fix random so that it is consistant
