@@ -1,10 +1,9 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-from sklearn import svm
+from sklearn.svm import SVC
 
 myData=pd.read_csv('student-mat.csv', sep=';')
-print(myData.columns)
 xVars=myData.iloc[:,1:32]
 xVars = pd.get_dummies(xVars)
 yVar=myData.iloc[:,32]
@@ -12,21 +11,23 @@ xTrain, xTest, yTrain, yTest = train_test_split(xVars, yVar, test_size=0.2, rand
 kernelBest=0
 CBest=0
 accuracyBest=0
-kernel=["linear","poly","rbf","sigmoid","precomputed"]
+kernel=["linear","poly","rbf","sigmoid"]
 CSet=[1,10,100]
 
 for i in kernel:
-    for C in CSet:
-        accuracy=0
-        print(f'kernel: {i}')
-        print(f'C: {C}')
-        print('accuracy: ?')
+    for CVal in CSet:
+        clf= SVC(kernel=i, C=CVal, random_state=1)
+        clf2=clf.fit(xTrain, yTrain)
+        predict=clf2.predict(xTest)
+        accuracy=accuracy_score(yTest, predict)
         if accuracy>accuracyBest:
-            kernelBest=i
-            CBest=C
-            accuracyBest=accuracy
+                kernelBest=i
+                CBest=CVal
+                accuracyBest=accuracy
 
-#Make final model
-finalAccuracy=0
+clf=SVC(kernel=kernelBest, C=CBest, random_state=1)
+finalModel=clf.fit(xTrain, yTrain)
+predict = finalModel.predict(xTest)
+finalAccuracy = accuracy_score(yTest,predict)
 print('Model is complete')
 print(f'Model accuracy: {finalAccuracy}')
