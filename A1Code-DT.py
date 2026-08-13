@@ -40,3 +40,14 @@ print('Model is complete')
 print(f'Model accuracy: {finalAccuracy}')
 print(f'Model precision: {finalPrecision}')
 print(f'Model recall: {fianlRecall}')
+
+featureImportances=finalModel.feature_importances_
+featureImportancesDict={}
+count=0
+for i in xVars.columns:
+    featureImportancesDict[i]=(featureImportances[count])
+    count+=1
+print('----------Feature Importances----------')
+featureImportancesDict=dict(sorted(featureImportancesDict.items(), key=lambda item: item[1]))
+for i in featureImportancesDict:
+    print(i,featureImportancesDict[i])
