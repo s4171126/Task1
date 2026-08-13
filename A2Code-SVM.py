@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.svm import SVC
 
 myData=pd.read_csv('student-mat.csv', sep=';')
@@ -43,5 +43,9 @@ clf=SVC(kernel=kernelBest, C=CBest, random_state=1)
 finalModel=clf.fit(xTrain, yTrain)
 predict = finalModel.predict(xTest)
 finalAccuracy = accuracy_score(yTest,predict)
+finalPrecision=precision_score(yTest,predict,average='macro')
+fianlRecall=recall_score(yTest,predict,average='macro')
 print('Model is complete')
 print(f'Model accuracy: {finalAccuracy}')
+print(f'Model precision: {finalPrecision}')
+print(f'Model recall: {fianlRecall}')

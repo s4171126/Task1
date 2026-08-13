@@ -3,7 +3,7 @@
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.tree import DecisionTreeClassifier
 
 myData=pd.read_csv('student_performance_dataset.csv')
@@ -34,6 +34,9 @@ clf=DecisionTreeClassifier(max_depth=maxDepth, splitter=splitterBest, random_sta
 finalModel=clf.fit(xTrain, yTrain)
 predict=finalModel.predict(xTest)
 finalAccuracy=accuracy_score(yTest, predict)
-
+finalPrecision=precision_score(yTest,predict,average='macro')
+fianlRecall=recall_score(yTest,predict,average='macro')
 print('Model is complete')
 print(f'Model accuracy: {finalAccuracy}')
+print(f'Model precision: {finalPrecision}')
+print(f'Model recall: {fianlRecall}')
