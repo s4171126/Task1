@@ -4,9 +4,23 @@ from sklearn.metrics import accuracy_score
 from sklearn.svm import SVC
 
 myData=pd.read_csv('student-mat.csv', sep=';')
+LG=[]
+for i in myData.iloc[:,32]:
+    if int(i)<=4:
+        LG.append('F')
+    elif int(i)<=8:
+        LG.append('D')
+    elif int(i)<=12:
+        LG.append('C')
+    elif int(i)<=16:
+        LG.append('B')
+    elif int(i)<=20:
+        LG.append('A')
+myData['LG']=LG
+
 xVars=myData.iloc[:,1:32]
 xVars = pd.get_dummies(xVars)
-yVar=myData.iloc[:,32]
+yVar=myData.iloc[:,33]
 xTrain, xTest, yTrain, yTest = train_test_split(xVars, yVar, test_size=0.2, random_state=1)
 kernelBest=0
 CBest=0
